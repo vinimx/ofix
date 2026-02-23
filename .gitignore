@@ -1,0 +1,36 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.idea/
+.fleet/
+.vscode/
+.history/
+
+# Node
+node_modules/
+*.log
+logs/
+
+# Nuxt build/dev
+**/.nuxt/
+**/.nitro/
+**/.output/
+**/.data/
+**/.cache/
+**/dist/
+
+# Local env files
+**/.env
+**/.env.*
+!**/.env.example
+
+# Temp files
+**/temp/
+
+# Python
+**/__pycache__/
+**/*.pyc
+**/venv/
+**/.venv/

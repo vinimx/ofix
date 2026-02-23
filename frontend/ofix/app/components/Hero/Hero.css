@@ -1,0 +1,68 @@
+/* Hero - bloco de boas-vindas com variaveis do global.css */
+.hero {
+  padding: var(--space-10) var(--space-6);
+  text-align: center;
+  background: linear-gradient(135deg, var(--color-bg-subtle) 0%, var(--color-bg) 100%);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border-light);
+  box-shadow: var(--shadow-md);
+  margin-bottom: var(--space-8);
+  transition: box-shadow var(--transition-normal), transform var(--transition-normal), border-color var(--transition-normal);
+}
+
+.hero:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-border);
+  transform: translateY(-2px);
+}
+
+.hero .title {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  margin: 0 0 var(--space-3);
+  letter-spacing: -0.02em;
+  line-height: var(--line-height-tight);
+  transition: color var(--transition-fast);
+}
+
+.hero .title-accent {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+  display: inline-block;
+  transition: color var(--transition-normal), transform var(--transition-normal);
+}
+
+.hero .title-accent:hover {
+  color: var(--color-primary-hover);
+  transform: scale(1.05);
+}
+
+.hero .title-accent:active {
+  transform: scale(0.98);
+}
+
+.hero .subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-muted);
+  margin: 0;
+  max-width: 36ch;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: var(--line-height-relaxed);
+  transition: color var(--transition-normal), transform var(--transition-normal);
+}
+
+.hero:hover .subtitle {
+  color: var(--color-text);
+}
+
+@media (min-width: 768px) {
+  .hero .title {
+    font-size: 2.5rem;
+  }
+  .hero .subtitle {
+    font-size: var(--font-size-xl);
+  }
+}
