@@ -1,0 +1,65 @@
+# render.yaml - Configuracao de infraestrutura como codigo para o Render.com
+# Este arquivo define todos os servicos que o projeto precisa.
+# Documentacao: https://render.com/docs/infrastructure-as-code
+
+services:
+  # Servico principal: frontend + API + worker rodando juntos no mesmo container
+  - type: web
+    name: ofix
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free          # Plano gratuito (container para apos 15min sem acesso)
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+      # A variavel PORT e injetada automaticamente pelo Render.
+      # O Nuxt/Nitro vai escutar nessa porta.
+
+      # URL do Redis: o Render preenche automaticamente com a URL do servico abaixo
+      - key: NUXT_REDIS_URL
+        fromService:
+          type: redis
+          name: ofix-redis
+          property: connectionString
+
+      # Caminho absoluto da pasta temporaria no container
+      - key: NUXT_TEMP_DIR
+        value: /app/frontend/ofix/temp
+
+      - key: NUXT_MAX_UPLOAD_MB
+        value: 20
+
+      - key: NUXT_CLEANUP_AGE_HOURS
+        value: 24
+
+      - key: NUXT_PYTHON_JOB_TIMEOUT_MS
+        value: 300000
+
+      # Caminho absoluto do script Python dentro do container
+      - key: NUXT_CONVERTER_SCRIPT_PATH
+        value: /app/conversor-python/convert.py
+
+      # Segredo compartilhado entre o worker e a API.
+      # O Render gera um valor aleatorio unico para este servico.
+      - key: NUXT_WORKER_SECRET
+        generateValue: true
+
+      # URL interna: worker chama a API na mesma maquina (container)
+      - key: NUXT_API_URL
+        value: http://localhost:3000
+
+    # Volume persistente para PDFs e OFXs (apenas planos pagos)
+    # Se estiver no plano gratuito, remova ou comente este bloco "disk".
+    # Sem ele, os arquivos temporarios serao perdidos quando o container reiniciar.
+    disk:
+      name: ofix-temp
+      mountPath: /app/frontend/ofix/temp
+      sizeGB: 1
+
+  # Servico Redis para a fila de jobs (BullMQ)
+  - type: redis
+    name: ofix-redis
+    plan: free              # Redis gratuito: 25 MB, sem persistencia
+    maxmemoryPolicy: allkeys-lru

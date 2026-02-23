@@ -13,6 +13,9 @@ node_modules/
 *.log
 logs/
 
+# Docs (planejamento e arquitetura - nao incluir no repo publico)
+docs/
+
 # Nuxt build/dev
 **/.nuxt/
 **/.nitro/
