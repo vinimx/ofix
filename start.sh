@@ -11,6 +11,12 @@ mkdir -p /app/frontend/ofix/temp
 
 cd /app/frontend/ofix
 
+# O Render injeta a variavel PORT dinamicamente (normalmente 10000, nao 3000).
+# O worker precisa chamar a API na porta correta para atualizar o status dos jobs.
+# Sobrescrevemos NUXT_API_URL aqui, antes de iniciar qualquer processo.
+export NUXT_API_URL="http://localhost:${PORT:-3000}"
+echo "[start] API URL configurada para: ${NUXT_API_URL}"
+
 echo "[start] Iniciando Worker em segundo plano..."
 node_modules/.bin/tsx scripts/worker.ts &
 WORKER_PID=$!
