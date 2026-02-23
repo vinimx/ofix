@@ -6,7 +6,7 @@ config()
 
 const redisUrl = process.env.NUXT_REDIS_URL ?? 'redis://localhost:6379'
 const pythonTimeout = parseInt(process.env.NUXT_PYTHON_JOB_TIMEOUT_MS ?? '300000', 10)
-const converterPath = process.env.NUXT_CONVERTER_SCRIPT_PATH ?? ''
+const converterPath = process.env.NUXT_CONVERTER_SCRIPT_PATH ?? './conversor-python/convert.py'
 const workerSecret = process.env.NUXT_WORKER_SECRET ?? 'dev-worker-secret-change-in-prod'
 const apiUrl = process.env.NUXT_API_URL ?? 'http://localhost:3000'
 

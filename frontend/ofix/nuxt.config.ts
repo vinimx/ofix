@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     tempDir: './temp',
     cleanupAgeHours: 24,
     pythonJobTimeoutMs: 300000,
-    converterScriptPath: '',
+    converterScriptPath: './conversor-python/convert.py',
     workerSecret: 'dev-worker-secret-change-in-prod',
   },
   nitro: {
