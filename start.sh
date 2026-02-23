@@ -3,10 +3,10 @@
 
 echo "=== OFIX Container Iniciando ==="
 echo "[check] PORT=${PORT:-NAO DEFINIDA}"
-echo "[check] NUXT_REDIS_URL=${NUXT_REDIS_URL:-NAO DEFINIDA}"
+# Exibe apenas se a variavel esta definida, sem revelar o valor (seguranca)
+echo "[check] NUXT_REDIS_URL=${NUXT_REDIS_URL:+DEFINIDA}"
 echo "[check] NUXT_WORKER_SECRET=${NUXT_WORKER_SECRET:+DEFINIDA}"
 echo "[check] NUXT_CONVERTER_SCRIPT_PATH=${NUXT_CONVERTER_SCRIPT_PATH:-NAO DEFINIDA}"
-echo "[check] NUXT_API_URL antes do override=${NUXT_API_URL:-NAO DEFINIDA}"
 
 # Verificar Python e dependencias
 echo "[check] Versao do Python: $(python3 --version 2>&1)"

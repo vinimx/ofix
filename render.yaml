@@ -46,9 +46,8 @@ services:
       - key: NUXT_WORKER_SECRET
         generateValue: true
 
-      # URL interna: worker chama a API na mesma maquina (container)
-      - key: NUXT_API_URL
-        value: http://localhost:3000
+      # NUXT_API_URL e definida dinamicamente pelo start.sh usando o PORT real do Render.
+      # Nao deve ser fixada aqui pois o Render usa porta diferente de 3000 em producao.
 
     # Volume persistente para PDFs e OFXs (apenas planos pagos)
     # Se estiver no plano gratuito, remova ou comente este bloco "disk".
