@@ -85,8 +85,6 @@ conversor-pdf-ofx/
 
 ---
 
-## 🛠️ Stack Tecnológico
-
 ### Frontend
 - **[Vue.js 3](https://vuejs.org/)** - Reactive UI framework
 - **[Nuxt 4](https://nuxt.com/)** - Full-stack Vue framework
